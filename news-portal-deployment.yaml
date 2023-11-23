@@ -20,6 +20,20 @@ spec:
                 configMapKeyRef:
                   name: portal-configmap
                   key: IP_SISTEMA
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 3
+            initialDelaySeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 5
+            initialDelaySeconds: 3
   replicas: 3
   selector:
     matchLabels:
